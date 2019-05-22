@@ -1,0 +1,99 @@
+/*
+* 自定义css变量
+*/
+@primaryColor: #38adff;
+@redColor: #ff544c;
+@backgroundColor: #f5f5f5;
+@color3: #333;
+@color6: #666;
+@color9: #999;
+
+/*单位*/
+@u: 32;
+@uu: rem;
+
+/**单位常量使用方法 unit(100/@u,@uu)  nuit: less删除或更换单位行数 nuit(数值,单位)**/
+/*css3*/
+image[lazy='loading'] {
+  width: 40px;
+  height: 300px;
+  margin: auto;
+}
+
+.px2rem(@name, @px) {
+    @{name}: @px / @u * 1rem;
+}
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.clamp2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* 考虑删除 start */
+.transform-rotate(@deg) {
+  transform: rotate(@deg);
+}
+
+.border-radius (@radius) {
+  border-radius: @radius;
+}
+
+.box-sizing(...) {
+  box-sizing: @arguments;
+}
+
+.box-shadow (@shadow) {
+  box-shadow: @shadow;
+}
+
+.linear-gradient(@direction, @colorFrom, @colorTo) {
+  background-image: linear-gradient(to @direction, @colorFrom, @colorTo);
+}
+
+/* 考虑删除 end */
+
+//mint dialogbox 样式重置
+.mint-msgbox {
+  height: unit(296 / @u, @uu);
+  background-color: transparent;
+  border-radius: 8px;
+
+  .mint-msgbox-content {
+    height: unit(194 / @u, @uu);
+    background-color: #fff;
+
+    .mint-msgbox-message {
+      margin-top: unit(50 / @u, @uu);
+      color: #000000;
+      font-size: unit(36 / @u, @uu);
+    }
+  }
+
+  .mint-msgbox-btns {
+    height: unit(100 / @u, @uu);
+    line-height: unit(100 / @u, @uu);
+
+    .mint-msgbox-btn {
+      font-size: unit(36 / @u, @uu);
+      margin-bottom: -1px;
+    }
+
+    .mint-msgbox-cancel {
+      color: @color9;
+    }
+
+    .mint-msgbox-confirm {
+      color: #ffffff;
+      background: @primaryColor;
+    }
+  }
+}

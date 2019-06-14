@@ -1,5 +1,7 @@
 let path = require('path')
 let glob = require('glob')
+const { SkeletonPlugin } = require('page-skeleton-webpack-plugin')
+
 function getEntry(globPath) {
 	let entries = {},
 		basename, tmp, pathname;
@@ -37,6 +39,25 @@ module.exports = {
 		port: 8088,
 		https: false,
 		hotOnly: false
+	},
+	configWebpack: {
+		plugin:[
+			new SkeletonPlugin({
+				pathname: path.resolve(__dirname, './shell'),
+				staticDir: path.resolve(__dirname, './dist'),
+				routes: ['/'],
+				excludes: ['.van-nav-bar', '.van-tabbar']
+				
+			})
+		]
+	},
+	chainWebpack: config => {
+		if(process.env.NODE_ENV !== 'development') {
+			config.plugin('html').tap(opts => {
+				opts[0].minify.removeComments = false
+				return opts;
+			})
+		}
 	}
 	// chainWebpack: config => {
 	// 	config.module
